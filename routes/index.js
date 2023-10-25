@@ -37,9 +37,11 @@ router.get('/specificActor', function(req, res, next) {
 
 router.get('/actors', function(req, res, next) {
   models.actor.findAll({}).then(actorsFound => {
-    res.render('actors', {
-      actors: actorsFound
-    });
+    let mappedActors = actorsFound.map(actor => (
+      { ActorID: actor.actor_id, 
+      Name: `${actor.first_name} ${actor.last_name}`}
+    ));
+    res.send(JSON.stringify(mappedActors));
   });
 });
 
