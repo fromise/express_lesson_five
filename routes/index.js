@@ -28,19 +28,6 @@ router.get('/specificActor', function(req, res, next) {
     });
 });
 
-router.get('/NickWahlberg', function(req, res, next) {
-  models.actor
-    .findOne({
-      where: {
-        actor_id: 2
-      }
-    })
-    .then(actor => {
-      res.render('NickWahlberg', {
-        actor: actor
-      });
-    });
-});
 
 router.get('/actors', function(req, res, next) {
 models.actor.findAll({}).then(actorsFound => {
@@ -48,6 +35,20 @@ models.actor.findAll({}).then(actorsFound => {
     actors: actorsFound
   });
 })
+});
+
+router.get('/actor/:id', function(req, res, next) {
+let actorId = parseInt(req.params.id);
+models.actor.findOne({
+  where: {
+    actor_id: actorId
+  }
+})
+.then(actor => {
+res.render('specificActor', {
+  actor: actor
+})
+});
 });
 
 module.exports = router;
