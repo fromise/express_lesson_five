@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
     actor_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     first_name: {
       type: DataTypes.STRING(45),
